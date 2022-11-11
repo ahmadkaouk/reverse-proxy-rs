@@ -1,0 +1,12 @@
+[package]
+name        = "reverse_proxy"
+description = "A simple reverse proxy with cache support"
+authors     = ["Ahmad Kaouk <ahmadkaouk.93@gmail.com"]
+version     = "0.1.0"
+readme      = "README.md"
+keywords    = ["reverse-proxy", "proxy", "cache", "rust"]
+edition     = "2021"
+
+[dependencies]
+reqwest = "0.11.12"
+tokio   = { version = "1", features = ["full"] }
