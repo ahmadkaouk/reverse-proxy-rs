@@ -1,3 +1,0 @@
-[General]
-# Time to Live for the entries in the cache (in seconds)
-ttl = 30

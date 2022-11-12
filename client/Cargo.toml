@@ -1,13 +1,13 @@
 [package]
-name = "client"
+name    = "rproxy_client"
+authors = ["Ahmad Kaouk <ahmadkaouk.93@gmail.com>"]
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+clap  = { version = "4.0.23", features = ["derive"] }
 prost = "0.11.2"
-tokio = {version = "1.21.2", features = ["rt-multi-thread"] }
+tokio = { version = "1.21.2", features = ["rt-multi-thread"] }
 tonic = "0.8.2"
 
 [build-dependencies]

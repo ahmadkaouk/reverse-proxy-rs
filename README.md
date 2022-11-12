@@ -10,22 +10,19 @@
 - Client
 - Server
 
-## Configuration
-Example `Config.toml`:
-```toml
-```
 ## Usage
+- server
 ```
-rproxy 0.1.0
-Ahmad KAOUK <ahmadkaouk.93@gmail.com>
+rproxy --help
 A simple reverse proxy with cache support
 
-USAGE:
-    rproxy [OPTIONS...] <url>
+Usage: rproxy [OPTIONS]
 
-OPTIONS:
-    -h, --help        Prints help information
-    -V, --version     Prints version information
+Options:
+  -i, --ip <IP>      IP of the Proxy Server [default: 127.0.0.1]
+  -p, --port <PORT>  Port of the Proxy Server [default: 50051]
+  -h, --help         Print help information
+  -V, --version      Print version information
 ```
 
 ## TODO
