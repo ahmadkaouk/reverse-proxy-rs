@@ -25,8 +25,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
 
     // Addr of the proxy server
-    let addr =
-        "http://".to_owned() + &args.server_ip + ":" + &args.server_port.to_string();
+    let addr = "http://".to_owned() + &args.server_ip + ":" + &args.server_port.to_string();
 
     let mut client = ProxyClient::connect(addr).await?;
 
