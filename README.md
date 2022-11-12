@@ -2,6 +2,8 @@
 **Rproxy** is a lightweight reverse proxy with cache support implemented in Rust.
 
 **Features**
+- [x] URL Parsing and verification
+- [x] gRPC communication
 - [x] Cache support
 
 ## Components
@@ -30,3 +32,4 @@ OPTIONS:
 - Authentication
 - Encrypted Communication between Client and Server
 - Test Scalability (Memory Cache Efficiency)
+- URL parsing and verification

@@ -1,0 +1,14 @@
+syntax = "proto3";
+package proxy;
+
+service Proxy {
+    rpc Get (ProxyRequest) returns (ProxyResponse);
+}
+
+message ProxyRequest {
+    string url = 1;
+}
+
+message ProxyResponse {
+    string response = 1;
+}
