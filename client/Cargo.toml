@@ -1,8 +1,9 @@
 [package]
-name    = "rproxy_client"
-authors = ["Ahmad Kaouk <ahmadkaouk.93@gmail.com>"]
-version = "0.1.0"
-edition = "2021"
+name        = "rproxy_client"
+description = "A lightweight client to communicate with the Reverse Proxy Server via gRPC"
+authors     = ["Ahmad Kaouk <ahmadkaouk.93@gmail.com>"]
+version     = "0.1.0"
+edition     = "2021"
 
 [dependencies]
 clap  = { version = "4.0.23", features = ["derive"] }

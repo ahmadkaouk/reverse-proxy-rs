@@ -5,6 +5,7 @@ use reverse_proxy::ReverseProxy;
 use tonic::transport::Server;
 
 mod error;
+mod cache;
 mod reverse_proxy;
 
 pub mod proxy {
@@ -20,6 +21,9 @@ struct Args {
     /// Port of the Proxy Server
     #[arg(short, long, default_value_t = 50051)]
     port: u16,
+    /// Time To Live for cache entries (in seconds)
+    #[arg(short, long, default_value_t = 30)]
+    ttl: u64,
 }
 
 #[tokio::main]
@@ -34,7 +38,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Construct and run the server
     Server::builder()
-        .add_service(ProxyServer::new(ReverseProxy::default()))
+        .add_service(ProxyServer::new(ReverseProxy::new(args.ttl)))
         .serve(addr)
         .await?;
     Ok(())
