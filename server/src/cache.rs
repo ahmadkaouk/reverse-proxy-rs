@@ -27,7 +27,7 @@ pub trait TimedEntry {
 }
 
 /// `TTLCacheEntry` is a cache entry that consists of a timestamp of insertion a value
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct TTLCacheEntry<V> {
     timestamp: Instant,
     value: V,
@@ -124,8 +124,71 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_instantion() {
+    fn test_instanciation() {
         let cache = TTLCache::<String, TTLCacheEntry<String>>::new(30);
         assert!(cache.store.read().unwrap().is_empty());
+    }
+
+    #[test]
+    fn test_cache_insert() {
+        let cache = TTLCache::<String, TTLCacheEntry<String>>::new(30);
+        cache
+            .store
+            .write()
+            .unwrap()
+            .insert("Key".to_string(), TTLCacheEntry::new("Value".to_string()));
+
+        let guard = cache.store.read().unwrap();
+        assert_eq!(guard.len(), 1);
+        assert_eq!(guard.get("Key").unwrap().value(), "Value".to_string());
+    }
+
+    #[test]
+    fn test_cache_remove() {
+        let cache = TTLCache::<String, TTLCacheEntry<String>>::new(30);
+        cache
+            .store
+            .write()
+            .unwrap()
+            .insert("Key".to_string(), TTLCacheEntry::new("Value".to_string()));
+
+        {
+            let guard = cache.store.read().unwrap();
+            assert_eq!(guard.len(), 1);
+            assert_eq!(guard.get("Key").unwrap().value(), "Value".to_string());
+        }
+
+        let mut guard = cache.store.write().unwrap();
+        guard.remove("Key");
+        assert_eq!(guard.len(), 0);
+        assert_eq!(guard.get("Key"), None);
+    }
+
+
+    #[test]
+    fn test_cache_clear() {
+        let cache = TTLCache::<String, TTLCacheEntry<String>>::new(30);
+        cache
+            .store
+            .write()
+            .unwrap()
+            .insert("Key".to_string(), TTLCacheEntry::new("Value".to_string()));
+        cache
+            .store
+            .write()
+            .unwrap()
+            .insert("Key1".to_string(), TTLCacheEntry::new("Value".to_string()));
+
+        {
+            let guard = cache.store.read().unwrap();
+            assert_eq!(guard.len(), 2);
+            assert_eq!(guard.get("Key").unwrap().value(), "Value".to_string());
+        }
+
+        let mut guard = cache.store.write().unwrap();
+        guard.clear();
+        assert_eq!(guard.len(), 0);
+        assert_eq!(guard.get("Key"), None);
+        assert_eq!(guard.get("Key1"), None);
     }
 }

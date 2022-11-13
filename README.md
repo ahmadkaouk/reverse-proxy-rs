@@ -9,8 +9,8 @@
 ![](resources/architecture.png)
 
 ## Components
-- Client: A lightweight client to communicate with the Reverse Proxy Server via gRPC>
-- Server:
+- Client: A lightweight client to communicate with the Reverse Proxy Server via gRPC.
+- Server: The server is composed of a cache system and a HTTP client. It serves the requests received from the client.
 
 ## Usage
 ### Client
