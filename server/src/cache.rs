@@ -14,7 +14,7 @@ pub trait Cache<K: Hash + Eq, V> {
     fn insert(&self, key: K, value: V);
     /// Remove the Entry associated to `key` in the cache
     fn remove(&self, key: &K);
-    /// Remove expired caches based on the cache ejiction policy
+    /// Remove expired caches based on the cache eviction policy
     fn flush(&self);
     /// Remove all the entries from the cache
     fn clear(&self);
@@ -163,7 +163,6 @@ mod tests {
         assert_eq!(guard.len(), 0);
         assert_eq!(guard.get("Key"), None);
     }
-
 
     #[test]
     fn test_cache_clear() {
