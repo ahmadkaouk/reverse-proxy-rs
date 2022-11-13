@@ -23,12 +23,13 @@ impl ReverseProxy {
             Some(entry) => {
                 println!("Found an entry for the request in the cache");
                 entry.value()
-            },
-            None=> {
+            }
+            None => {
                 // Get the response from the original server (does not block the cache)
                 println!("Not present in the Cache, Request from original server");
                 let res = reqwest::get(url).await?.text().await?;
-                self.cache.insert(url.to_string(), TTLCacheEntry::new(res.clone()));
+                self.cache
+                    .insert(url.to_string(), TTLCacheEntry::new(res.clone()));
                 res
             }
         };

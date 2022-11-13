@@ -4,8 +4,8 @@ use proxy::proxy_server::ProxyServer;
 use reverse_proxy::ReverseProxy;
 use tonic::transport::Server;
 
-mod error;
 mod cache;
+mod error;
 mod reverse_proxy;
 
 pub mod proxy {

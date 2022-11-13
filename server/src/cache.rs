@@ -26,8 +26,7 @@ pub trait TimedEntry {
     fn timestamp(&self) -> Instant;
 }
 
-/// `TTLCacheEntry` is a cache entry that consists of a timestamp of insertion
-/// a value
+/// `TTLCacheEntry` is a cache entry that consists of a timestamp of insertion a value
 #[derive(Debug, Clone)]
 pub struct TTLCacheEntry<V> {
     timestamp: Instant,
@@ -127,5 +126,6 @@ mod tests {
     #[test]
     fn test_instantion() {
         let cache = TTLCache::<String, TTLCacheEntry<String>>::new(30);
+        assert!(cache.store.read().unwrap().is_empty());
     }
 }
